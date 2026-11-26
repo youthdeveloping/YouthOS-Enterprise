@@ -1,0 +1,9 @@
+/auto
+/.build
+/chroot
+/caches
+/config
+/live-build
+*.iso
+*.img
+*.log
