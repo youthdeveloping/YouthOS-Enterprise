@@ -14,7 +14,7 @@ YouthOS-Enterprise is a separate edition in the YouthOS family. It is designed f
 
 ## Current status
 
-<badge>Early foundation</badge>
+**Status: Early foundation**
 
 This repository currently contains the project specification and initial build scaffolding. It is not yet a bootable or production-ready ISO. Hardware compatibility, installation, upgrades, security controls, and recovery must be tested before release.
 
@@ -49,7 +49,7 @@ sudo apt install -y live-build debootstrap xorriso squashfs-tools
 Then run:
 
 ```bash
-sudo ./scripts/build-iso.sh
+sudo bash ./scripts/build-iso.sh
 ```
 
 The first build is a minimal live image scaffold. It does not yet include the complete enterprise management stack or a validated installer.
