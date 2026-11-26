@@ -1,0 +1,44 @@
+name: Build YouthOS-Enterprise ISO
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "config/**"
+      - "scripts/**"
+      - ".github/workflows/build.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build in Debian 13
+        run: |
+          docker run --privileged --rm \
+            -v "$PWD:/workspace" \
+            -w /workspace \
+            debian:trixie \
+            bash -lc '
+              set -eux
+              apt-get update
+              DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+                live-build debootstrap xorriso squashfs-tools ca-certificates
+              chmod +x scripts/build-iso.sh
+              ./scripts/build-iso.sh
+            '
+
+      - name: Upload ISO artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: youthos-enterprise-evaluation-iso
+          path: "*.iso"
+          if-no-files-found: error
+          retention-days: 7
