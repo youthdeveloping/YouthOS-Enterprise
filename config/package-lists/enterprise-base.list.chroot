@@ -1,0 +1,11 @@
+# Minimal base utilities for the initial Debian 13 live image.
+# Keep this list lean; desktop and server profiles will use separate lists.
+sudo
+ca-certificates
+curl
+wget
+less
+nano
+vim-tiny
+bash-completion
+locales
